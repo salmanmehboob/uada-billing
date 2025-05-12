@@ -1,0 +1,1151 @@
+/**
+* Template Name: FlexStart - v1.12.0
+* Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+:root {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #444444;
+
+}
+
+a {
+    color: #4154f1;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #717ff5;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Nunito", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Sections
+--------------------------------------------------------------*/
+section {
+    padding: 60px 0;
+    padding-bottom: 0px;
+    overflow: hidden;
+}
+
+.section-header {
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 0;
+    color: #4154f1;
+    text-transform: uppercase;
+}
+
+.section-header p {
+    margin: 10px 0 0 0;
+    padding: 0;
+    font-size: 38px;
+    line-height: 42px;
+    font-weight: 700;
+    color: #012970;
+}
+
+@media (max-width: 768px) {
+    .section-header p {
+        font-size: 28px;
+        line-height: 32px;
+    }
+}
+
+/*--------------------------------------------------------------
+# Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs {
+    padding: 15px 0;
+    background: #012970;
+    min-height: 40px;
+    margin-top: 82px;
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+    .breadcrumbs {
+        margin-top: 57px;
+    }
+}
+
+.breadcrumbs h2 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0 0 10px 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.breadcrumbs ol a {
+    color: #fff;
+    transition: 0.3s;
+}
+
+.breadcrumbs ol a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs ol li+li {
+    padding-left: 10px;
+}
+
+.breadcrumbs ol li+li::before {
+    display: inline-block;
+    padding-right: 10px;
+    color: #8894f6;
+    content: "/";
+}
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 99999;
+    background: #6D0E53;
+    /*  line chnaged */
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+
+.back-to-top i {
+    font-size: 24px;
+    color: #fff;
+    line-height: 0;
+}
+
+.back-to-top:hover {
+    background: #7C2664;
+    color: #fff;
+}
+
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# Disable aos animation delay on mobile devices
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+    [data-aos-delay] {
+        transition-delay: 0 !important;
+    }
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.header {
+    transition: all 0.5s;
+    z-index: 997;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /******************************************** Commented At 3-1-2023 *********************************************/
+    /* padding: 10px 0; */
+    /******************************************** Commented At 3-1-2023 *********************************************/
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    /*background-color: #6D0E53;*/
+}
+
+.header.header-scrolled {
+    background-color: #6D0E53;
+    /******************************************** Commented At 3-1-2023 *********************************************/
+    /* padding: 10px 0; */
+    /******************************************** Commented At 3-1-2023 *********************************************/
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+}
+
+.header .logo {
+    line-height: 0;
+    gap: 30px;
+}
+
+.header .logo img {
+    max-height: 80px;
+    margin-right: 6px;
+}
+
+.header .logo span {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+    margin-top: 3px;
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation
+*/
+.navbar {
+    padding: 0;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+    color: #fff;
+}
+
+.navbar .getstarted,
+.navbar .getstarted:focus {
+    /*background: #FFB700;*/
+    background: #6D0E53;
+    padding: 8px 20px;
+    margin-left: 30px;
+    border-radius: 4px;
+    /*color: black;*/
+    color: white;
+}
+
+.navbar .getstarted:hover,
+.navbar .getstarted:focus:hover {
+    color: #fffff;
+    /*color: #000000;*/
+    background: #FFB700;
+}
+
+.navbar .dropdown ul {
+    display: block;
+    position: absolute;
+    left: 14px;
+    top: calc(100% + 30px);
+    margin: 0;
+    padding: 10px 0;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.navbar .dropdown ul li {
+    min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.navbar .dropdown ul a i {
+    font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+    color: #4154f1;
+}
+
+.navbar .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+    top: 0;
+    left: calc(100% - 30px);
+    visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+    opacity: 1;
+    top: 0;
+    left: 100%;
+    visibility: visible;
+}
+
+@media (max-width: 1366px) {
+    .navbar .dropdown .dropdown ul {
+        left: -90%;
+    }
+
+    .navbar .dropdown .dropdown:hover>ul {
+        left: -100%;
+    }
+}
+
+/**
+* Mobile Navigation
+*/
+.mobile-nav-toggle {
+    color: #6D0E53;
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    line-height: 0;
+    transition: 0.5s;
+}
+
+.mobile-nav-toggle.bi-x {
+    color: #fff;
+}
+
+@media (max-width: 991px) {
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    .navbar ul {
+        display: none;
+    }
+}
+
+.navbar-mobile {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #006600;
+    transition: 0.3s;
+}
+
+.navbar-mobile .mobile-nav-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.navbar-mobile ul {
+    display: block;
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    padding: 10px 0;
+    border-radius: 10px;
+    background-color: #fff;
+    overflow-y: auto;
+    transition: 0.3s;
+}
+
+.navbar-mobile a,
+.navbar-mobile a:focus {
+    padding: 10px 20px;
+    font-size: 15px;
+    color: black;
+}
+
+.navbar-mobile a:hover,
+.navbar-mobile .active,
+.navbar-mobile li:hover>a {
+    color: black;
+}
+
+.navbar-mobile .getstarted,
+.navbar-mobile .getstarted:focus {
+    margin: 15px;
+}
+
+.navbar-mobile .dropdown ul {
+    position: static;
+    display: none;
+    margin: 10px 20px;
+    padding: 10px 0;
+    z-index: 99;
+    opacity: 1;
+    visibility: visible;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+}
+
+.navbar-mobile .dropdown ul li {
+    min-width: 200px;
+}
+
+.navbar-mobile .dropdown ul a {
+    padding: 10px 20px;
+}
+
+.navbar-mobile .dropdown ul a i {
+    font-size: 12px;
+}
+
+.navbar-mobile .dropdown ul a:hover,
+.navbar-mobile .dropdown ul .active:hover,
+.navbar-mobile .dropdown ul li:hover>a {
+    color: #006600;
+}
+
+.navbar-mobile .dropdown>.dropdown-active {
+    display: block;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+    width: 100%;
+    /* height: 100vh; */
+    /* background: url(../img/hero-bg.png) top center no-repeat;
+    background-size: cover; */
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 700;
+    color: #012970;
+}
+
+.hero h2 {
+    margin: 15px 0 0 0;
+    font-size: 30px;
+}
+
+.hero .btn-get-started {
+    margin-top: 30px;
+    line-height: 23px;
+    padding: 80px 200px;
+    border-radius: 4px;
+    transition: 0.5s;
+    color: #fff;
+    background: #006600;
+    box-shadow: 0px 5px 30px rgba(65, 84, 241, 0.4);
+}
+
+.hero .btn-get-started span {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.hero .btn-get-started i {
+    margin-left: 5px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.hero .btn-get-started:hover i {
+    transform: translateX(5px);
+}
+
+.hero .hero-img {
+    text-align: right;
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        background-attachment: fixed;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero {
+        height: auto;
+        padding: 120px 0 60px 0;
+    }
+
+    .hero .hero-img {
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .hero .hero-img img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .hero .hero-img img {
+        width: 100%;
+    }
+}
+
+/*--------------------------------------------------------------
+# Index Page
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about .content {
+    /* background-color: #f6f9ff; */
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.about h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+}
+
+.about h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+}
+
+.about p {
+    margin: 15px 0 30px 0;
+    line-height: 24px;
+}
+
+.about .btn-read-more {
+    line-height: 0;
+    padding: 15px 40px;
+    border-radius: 4px;
+    transition: 0.5s;
+    color: #fff;
+    background: #4154f1;
+    box-shadow: 0px 5px 25px rgba(65, 84, 241, 0.3);
+}
+
+.about .btn-read-more span {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.about .btn-read-more i {
+    margin-left: 5px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.about .btn-read-more:hover i {
+    transform: translateX(5px);
+}
+
+/*--------------------------------------------------------------
+# Values
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+
+
+.row {
+    flex-wrap: wrap-reverse;
+}
+
+.minimizedscreen {
+
+    padding: 0px;
+}
+
+@media screen and (min-width: 1000px) {
+    .minimizedscreen {
+        display: none;
+        padding: 0px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .MW {
+        display: none;
+    }
+
+    .hero {
+        height: 100vh;
+    }
+
+    .SixtyKDiv {
+        position: absolute;
+        /* top: 4vh;
+        left: 66vw; */
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: center;
+    }
+
+
+}
+
+/* Custom CSS */
+
+.WSIP_BSIPDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3.4vh;
+    gap: 30px;
+
+
+}
+
+.WSIPDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #62004F;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 50px;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.3);
+    color: white;
+    transition: transform .4s;
+    /* Animation */
+
+}
+
+
+.WSIPDiv:hover {
+
+    color: white;
+    transform: scale(1.1);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.CYRWText {
+    font-size: 22px;
+    padding-top: 50px;
+}
+
+.FirmText {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.Footer {
+    color: #62004F;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 100px;
+}
+
+.SubLandingPageHero {
+
+    padding-top: 23vh;
+    height: fit-content;
+
+}
+
+.MainDiv {
+    background-color: #62004F
+}
+
+.RegisterBTN {
+    width: fit-content;
+    background-color: white;
+    color: black;
+}
+
+.MW {
+    padding: 0px;
+    margin: 0px;
+    min-width: 100vw;
+    height: 86.7vh;
+    position: relative;
+}
+
+.SectionImage {
+    padding-top: 4vh;
+}
+
+.RegisterBTNHome {
+    position: absolute;
+    top: 47%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #62004F;
+    color: white;
+    font-size: 16px;
+    padding: 8px 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.RegisterBTNHome:hover {
+    background-color: #7C2664;
+    color: white;
+}
+
+.WIBtext {
+    text-decoration: underline;
+    color: #FFB700;
+    padding-bottom: 20px;
+    font-weight: 700;
+    font-size: 70px;
+}
+
+.WIBDisc {
+    color: white;
+    font-weight: 500;
+}
+
+.textdiv {
+    color: #FFB700;
+    font-weight: 700;
+}
+
+.carousel-inner {
+    height: 100%;
+    width: 100%;
+}
+
+.CIA {
+    height: 83.6vh;
+    width: 100%;
+    position: relative;
+}
+
+.CIT {
+    height: 83.6vh;
+    width: 100%;
+}
+
+
+.YouthWorkImg {
+    width: 200px;
+    height: auto;
+    margin-right: 4%;
+    margin-top: 1%;
+}
+
+.carousel-indicators button {
+    /* display: inline-block; */
+    /* width: 48px;
+    height: 48px; */
+    /* margin: 10px; */
+    /* text-indent: 0; */
+    cursor: pointer;
+    /* border: none; */
+    /* border-radius: 50%; */
+    background-color: #FFB700 !important;
+
+}
+
+.carousel-indicators .active {
+    /* width: 48px;
+    height: 48px;
+    margin: 10px; */
+    background-color: #000000 !important;
+}
+
+.btnProgrampage {
+    background-color: #FFB700 !important;
+    color: #000000 !important;
+}
+
+
+.SixtyK {
+
+    font-size: 120px;
+    color: #62004F;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+}
+
+.PI {
+    font-size: 40px;
+    color: #545455;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+}
+
+.FYG {
+    font-size: 20px;
+    color: #545455;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+}
+
+.SixtyKDiv {
+    position: absolute;
+    top: 4vh;
+    left: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+}
+
+.ARYRDIV {
+    position: absolute;
+    top: 50vh;
+    left: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.ARYR {
+
+    font-size: 80px;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bolder;
+    padding: 0;
+    margin: 0;
+
+}
+
+.Are {
+    line-height: 1.5;
+}
+
+.A {
+    padding-right: 42px;
+}
+
+.Y {
+    line-height: 0.1;
+}
+
+
+.BINSIMAGE {
+    position: absolute;
+    top: 60vh;
+    left: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.SecondSliderDiv {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+
+}
+
+.SSLeftSideDiv {
+
+    display: flex;
+    flex-direction: column;
+
+
+
+
+}
+
+.SSRightSideDiv {
+
+    display: flex;
+    flex-direction: column;
+
+
+
+
+}
+
+.AUText {
+    font-size: 50px;
+    color: #62004F;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+
+}
+
+.AUDESCTEXT {
+    font-size: 18px;
+    color: #545455;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
+.IconAndTextDiv {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+
+
+}
+
+.AUDESCTEXT2 {
+    font-size: 18px;
+    color: #545455;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    padding-left: 50px;
+}
+
+
+
+.Heading {
+    color: #62004F;
+    font-weight: 800;
+}
+
+
+
+.MSBackgrounSlider01 {
+    height: 90vh;
+    width: 100vw;
+}
+
+
+
+
+
+/* Mobile CSS */
+
+
+
+@media(max-width:1000px) {
+
+
+    .CIAMS {
+        position: relative;
+        display: flex;
+    }
+
+    .SixtyKDiv {
+        top: 8%;
+        left: 0;
+        align-items: center;
+        display: block;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .SixtyK {
+        font-size: 40px;
+    }
+
+    .PI {
+        font-size: 35px;
+    }
+
+    .BINSIMAGE {
+
+        top: 75%;
+        align-self: center;
+        width: 340px;
+        height: auto;
+    }
+
+    .SecondSliderDiv {
+        background-color: white;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+
+
+
+    }
+    .CIA {
+        height:800px;
+        overflow: scroll;
+        width: 100%;
+        /* position: relative; */
+    }
+
+
+
+
+}
+
+
+
+@media(max-width:414px) {
+    .CIA {
+
+        height:741px;
+        overflow: scroll;
+        width: 100%;
+        /* position: relative; */
+    }
+    .AUText {
+       padding-top: 50px;
+
+    }
+    .SSRightSideDiv{
+        padding-bottom: 50px;
+    }
+
+}
+
+
+@media(max-width:393px) {
+    .CIA {
+
+        height:706px;
+        overflow: scroll;
+        width: 100%;
+        /* position: relative; */
+    }
+    .AUText {
+       padding-top: 50px;
+
+    }
+    .SSRightSideDiv{
+        padding-bottom: 50px;
+    }
+
+}
+
+@media(max-width:390px) {
+    .CIA {
+
+        height:706px;
+        overflow: scroll;
+        width: 100%;
+        /* position: relative; */
+    }
+    .AUText {
+       padding-top: 50px;
+
+    }
+    .SSRightSideDiv{
+        padding-bottom: 50px;
+    }
+
+}
+
+
+
+
+@media(max-width:375px) {
+    .CIA {
+
+        height:560px;
+        overflow: scroll;
+        width: 100%;
+        /* position: relative; */
+    }
+    .AUText {
+       padding-top: 50px;
+
+    }
+    .SSRightSideDiv{
+        padding-bottom: 50px;
+    }
+
+}
+
+
+@media(max-width:360px) {
+    .CIA {
+
+        height:611px;
+        overflow: scroll;
+        width: 100%;
+        /* position: relative; */
+    }
+    .AUText {
+       padding-top: 50px;
+
+    }
+    .SSRightSideDiv{
+        padding-bottom: 50px;
+    }
+
+}
+
+
