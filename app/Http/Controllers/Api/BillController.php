@@ -60,6 +60,7 @@ class BillController extends Controller
         return response()->json([
             'status' => true,
             'bill' => $bill,
+            'billHistory' => $billHistory,
          ]);
     }
 
