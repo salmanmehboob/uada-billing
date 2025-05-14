@@ -36,6 +36,7 @@ class BillController extends Controller
             'billCharges', 'billCharges.PlotCharges.charge', 'transaction', 'bank'
         ])
             ->where('allotee_id', $allotee->id)
+            ->where('is_paid', '=',0)
             ->orderBy('id', 'desc')
             ->first(); // Use first() to get the latest one
 
@@ -47,20 +48,18 @@ class BillController extends Controller
         }
 
         // Step 3: Get Arrears
-        $arrears = Bill::with('fromMonth', 'toMonth', 'transaction')
-            ->where('id', '<', $bill->id)
-            ->where('is_period', 1)
-            ->where('allotee_id', $bill->allotee_id)
-            ->where('is_paid', 0)
-            ->get();
+//        $arrears = Bill::with('fromMonth', 'toMonth', 'transaction')
+//            ->where('id', '<', $bill->id)
+////            ->where('is_period', 1)
+//            ->where('allotee_id', $bill->allotee_id)
+//            ->where('is_paid', '=',0)
+//            ->get();
 
-        $totalArrearAmount = $arrears->where('is_paid', 0)->sum('total');
 
         // Step 4: Return JSON Response
         return response()->json([
             'status' => true,
             'bill' => $bill,
-            'billHistory' => $billHistory,
          ]);
     }
 

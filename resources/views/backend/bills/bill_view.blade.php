@@ -31,7 +31,6 @@
         }
 
 
-
         .s9 {
             color: black;
             font-family: Arial, sans-serif;
@@ -122,12 +121,6 @@
                 <div class="header-elements">
                     <div class="list-icons">
 
-
-                        <button id="printBtn" type="button"
-                                class="btn btn-info btn-labeled btn-labeled-left check-total"><b><i
-                                    class="icon-printer"></i></b> Print
-                        </button>
-
                         <button id="pdfBtn" type="button" data-invoice="{{$bill->bill_number}}"
                                 class="btn btn-warning btn-labeled btn-labeled-left check-total"><b><i
                                     class="icon-download"></i></b> PDF
@@ -150,7 +143,8 @@
                                 </td>
                                 <td class="" style="width:645pt;" colspan="6">
 
-                                    <p class="s5 text-center" style="margin-bottom: 0px;"> {{getSettingValue('company_name')}}</p>
+                                    <p class="s5 text-center"
+                                       style="margin-bottom: 0px;"> {{getSettingValue('company_name')}}</p>
                                     <p class="s6 pl-3 text-center" style="margin-bottom: 0px;">
                                         BANK: {{$bill->bank->name . ' ' . $bill->bank->branch}}
                                         A/C: {{$bill->bank->account_no}} </p>
@@ -180,24 +174,25 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 437pt;"
                                     colspan="6">
-                                    <p class="s12 pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}*</p>
+                                    <p class="s12 pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}
+                                        *</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="border border-top border-left border-bottom" rowspan="4" style="width: 300pt"
                                     colspan="6">
 
-                                    <p class="s10 pl-3 pr-3 text-left"style="margin-bottom: 0px" >
+                                    <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
                                         {{$bill->allotee->name}}
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Plot  : <span class="s11">{{$bill->allotee->plot_no}}</span>
+                                        Plot : <span class="s11">{{$bill->allotee->plot_no}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Area  : <span class="s11">{{$bill->size->name}}</span>
+                                        Area : <span class="s11">{{$bill->size->name}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Sector  : <span class="s11">{{$bill->sector->name}}</span>
+                                        Sector : <span class="s11">{{$bill->sector->name}}</span>
                                     </p>
 
                                     <p class="s11 pl-3 text-left" style="line-height: 9pt;margin-bottom: 0px;">
@@ -215,7 +210,8 @@
 
                                 <td class="border border-top border-left border-bottom" style="width: 95pt;"
                                     colspan="2">
-                                    <p class="s13 pl-1 text-left" style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
+                                    <p class="s13 pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
                                 </td>
 
 
@@ -239,15 +235,18 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="2">
-                                    <p class="s11 pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
+                                    <p class="s11 pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s13  text-left" style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
+                                    <p class="s13  text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s11  pl-1 text-left" style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
+                                    <p class="s11  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
                                         TO {{$bill->toMonth->short ?? ''}} {{$bill->year}} </p>
                                 </td>
                             </tr>
@@ -283,19 +282,23 @@
                                     {{--                                    {{dd($billCharges->PlotCharges)}}--}}
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s10 pl-1  text-left" style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
+                                        <p class="s10 pl-1  text-left"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-1  text-right" style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-1  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{$billCharges->total}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->total}}</p>
                                     </td>
                             </tr>
                             @endforeach
@@ -310,24 +313,28 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 826pt;"
                                     colspan="12">
-                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable Amount</p>
+                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable
+                                        Amount</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;"
                                 >
-                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current Bill</p>
+                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current
+                                        Bill</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
-                                    colspan="2" >
-                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">Arrears</p>
+                                    colspan="2">
+                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">
+                                        Arrears</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
-                                    colspan="3" >
-                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before Due Date</p>
+                                    colspan="3">
+                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before
+                                        Due Date</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;"
@@ -337,31 +344,37 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;"
                                 >
-                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After Due Date</p>
+                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After
+                                        Due Date</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->bill_total}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->bill_total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
                                     colspan="2">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->arrears}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->arrears}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="3">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_total}}</p>
                                 </td>
                             </tr>
 
@@ -379,7 +392,8 @@
                                 </td>
                                 <td class="" style="width:645pt;" colspan="6">
 
-                                    <p class="s5 text-center" style="margin-bottom: 0px"> {{getSettingValue('company_name')}}</p>
+                                    <p class="s5 text-center"
+                                       style="margin-bottom: 0px"> {{getSettingValue('company_name')}}</p>
                                     <p class="s6  pl-3 text-center" style="margin-bottom: 0px">
                                         BANK: {{$bill->bank->name . ' ' . $bill->bank->branch}}
                                         A/C: {{$bill->bank->account_no}} </p>
@@ -409,7 +423,8 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 437pt;"
                                     colspan="6">
-                                    <p class="s12  pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}*</p>
+                                    <p class="s12  pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}
+                                        *</p>
                                 </td>
                             </tr>
                             <tr>
@@ -420,13 +435,13 @@
                                         {{$bill->allotee->name}}
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Plot  : <span class="s11">{{$bill->allotee->plot_no}}</span>
+                                        Plot : <span class="s11">{{$bill->allotee->plot_no}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Area  : <span class="s11">{{$bill->size->name}}</span>
+                                        Area : <span class="s11">{{$bill->size->name}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Sector  : <span class="s11">{{$bill->sector->name}}</span>
+                                        Sector : <span class="s11">{{$bill->sector->name}}</span>
                                     </p>
 
                                     <p class="s11 pl-3 text-left" style="line-height: 9pt;margin-bottom: 0px;">
@@ -444,7 +459,8 @@
 
                                 <td class="border border-top border-left border-bottom" style="width: 95pt;"
                                     colspan="2">
-                                    <p class="s13  pl-1 text-left" style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
+                                    <p class="s13  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
                                 </td>
 
 
@@ -468,15 +484,18 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="2">
-                                    <p class="s11  pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
+                                    <p class="s11  pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s13  pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
+                                    <p class="s13  pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s11  pl-1 text-left" style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
+                                    <p class="s11  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
                                         TO {{$bill->toMonth->short ?? ''}} {{$bill->year}} </p>
                                 </td>
                             </tr>
@@ -507,29 +526,31 @@
                                 </th>
 
                             </tr>
-                            <tr>
-                                @foreach($bill->billCharges as $billCharges)
+                            @foreach($bill->billCharges as $billCharges)
+                                <tr>
                                     {{--                                    {{dd($billCharges->PlotCharges)}}--}}
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s10 pl-1  text-left" style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
+                                        <p class="s10 pl-1  text-left"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-1  text-right" style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-1  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{$billCharges->total}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->total}}</p>
                                     </td>
-                            </tr>
+                                </tr>
                             @endforeach
-
-                            </tr>
 
 
                         </table>
@@ -539,58 +560,68 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 826pt;"
                                     colspan="12">
-                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable Amount</p>
+                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable
+                                        Amount</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;"
-                                    >
-                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current Bill</p>
+                                >
+                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current
+                                        Bill</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
-                                    colspan="2" >
-                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">Arrears</p>
+                                    colspan="2">
+                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">
+                                        Arrears</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
-                                    colspan="3" >
-                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before Due Date</p>
+                                    colspan="3">
+                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before
+                                        Due Date</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;"
-                                    >
+                                >
                                     <p class="s10 pl-3 text-left line-height-9" style="margin-bottom: 0px">Surcharge</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;"
-                                    >
-                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After Due Date</p>
+                                >
+                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After
+                                        Due Date</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->bill_total}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->bill_total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
                                     colspan="2">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->arrears}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->arrears}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="3">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_total}}</p>
                                 </td>
                             </tr>
 
@@ -608,7 +639,8 @@
                                 </td>
                                 <td class="" style="width:645pt;" colspan="6">
 
-                                    <p class="s5 text-center"  style="margin-bottom: 0px"> {{getSettingValue('company_name')}}</p>
+                                    <p class="s5 text-center"
+                                       style="margin-bottom: 0px"> {{getSettingValue('company_name')}}</p>
                                     <p class="s6 pl-3 text-center" style="margin-bottom: 0px">
                                         BANK: {{$bill->bank->name . ' ' . $bill->bank->branch}}
                                         A/C: {{$bill->bank->account_no}} </p>
@@ -633,12 +665,13 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width:389pt;"
                                     colspan=6>
-                                    <p class="s10  pl-4 pr-3 text-center"  style="margin-bottom: 0px">Bill Number</p>
+                                    <p class="s10  pl-4 pr-3 text-center" style="margin-bottom: 0px">Bill Number</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 437pt;"
                                     colspan="6">
-                                    <p class="s12  pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}*</p>
+                                    <p class="s12  pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}
+                                        *</p>
                                 </td>
                             </tr>
                             <tr>
@@ -649,13 +682,13 @@
                                         {{$bill->allotee->name}}
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Plot  : <span class="s11">{{$bill->allotee->plot_no}}</span>
+                                        Plot : <span class="s11">{{$bill->allotee->plot_no}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Area  : <span class="s11">{{$bill->size->name}}</span>
+                                        Area : <span class="s11">{{$bill->size->name}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Sector  : <span class="s11">{{$bill->sector->name}}</span>
+                                        Sector : <span class="s11">{{$bill->sector->name}}</span>
                                     </p>
 
                                     <p class="s11 pl-3 text-left" style="line-height: 9pt;margin-bottom: 0px;">
@@ -673,7 +706,8 @@
 
                                 <td class="border border-top border-left border-bottom" style="width: 95pt;"
                                     colspan="2">
-                                    <p class="s13  pl-1 text-left" style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
+                                    <p class="s13  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
                                 </td>
 
 
@@ -697,15 +731,18 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="2">
-                                    <p class="s11  pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
+                                    <p class="s11  pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s13  pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
+                                    <p class="s13  pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s11  pl-1 text-left" style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
+                                    <p class="s11  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
                                         TO {{$bill->toMonth->short ?? ''}} {{$bill->year}} </p>
                                 </td>
                             </tr>
@@ -736,29 +773,32 @@
                                 </th>
 
                             </tr>
+                            @foreach($bill->billCharges as $billCharges)
                             <tr>
-                                @foreach($bill->billCharges as $billCharges)
                                     {{--                                    {{dd($billCharges->PlotCharges)}}--}}
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s10 pl-1  text-left" style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
+                                        <p class="s10 pl-1  text-left"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-1  text-right" style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-1  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{$billCharges->total}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->total}}</p>
                                     </td>
                             </tr>
                             @endforeach
 
-                            </tr>
 
 
                         </table>
@@ -768,58 +808,68 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 826pt;"
                                     colspan="12">
-                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable Amount</p>
+                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable
+                                        Amount</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;"
-                                    >
-                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current Bill</p>
+                                >
+                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current
+                                        Bill</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
-                                    colspan="2" >
-                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">Arrears</p>
+                                    colspan="2">
+                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">
+                                        Arrears</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
-                                    colspan="3" >
-                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before Due Date</p>
+                                    colspan="3">
+                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before
+                                        Due Date</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;"
-                                    >
+                                >
                                     <p class="s10 pl-3 text-left line-height-9" style="margin-bottom: 0px">Surcharge</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;"
-                                    >
-                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After Due Date</p>
+                                >
+                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After
+                                        Due Date</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->bill_total}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->bill_total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
                                     colspan="2">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->arrears}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->arrears}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="3">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_total}}</p>
                                 </td>
                             </tr>
 
@@ -837,7 +887,8 @@
                                 </td>
                                 <td class="" style="width:645pt;" colspan="6">
 
-                                    <p class="s5 text-center" style="margin-bottom: 0px"> {{getSettingValue('company_name')}}</p>
+                                    <p class="s5 text-center"
+                                       style="margin-bottom: 0px"> {{getSettingValue('company_name')}}</p>
                                     <p class="s6  pl-3 text-center" style="margin-bottom: 0px">
                                         BANK: {{$bill->bank->name . ' ' . $bill->bank->branch}}
                                         A/C: {{$bill->bank->account_no}} </p>
@@ -867,7 +918,8 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 437pt;"
                                     colspan="6">
-                                    <p class="s12  pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}*</p>
+                                    <p class="s12  pl-3 text-left" style="margin-bottom: 0px">*{{$bill->bill_number}}
+                                        *</p>
                                 </td>
                             </tr>
                             <tr>
@@ -878,13 +930,13 @@
                                         {{$bill->allotee->name}}
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Plot  : <span class="s11">{{$bill->allotee->plot_no}}</span>
+                                        Plot : <span class="s11">{{$bill->allotee->plot_no}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Area  : <span class="s11">{{$bill->size->name}}</span>
+                                        Area : <span class="s11">{{$bill->size->name}}</span>
                                     </p>
                                     <p class="s10 pl-3 pr-3 text-left" style="margin-bottom: 0px">
-                                        Sector  : <span class="s11">{{$bill->sector->name}}</span>
+                                        Sector : <span class="s11">{{$bill->sector->name}}</span>
                                     </p>
 
                                     <p class="s11 pl-3 text-left" style="line-height: 9pt;margin-bottom: 0px;">
@@ -902,7 +954,8 @@
 
                                 <td class="border border-top border-left border-bottom" style="width: 95pt;"
                                     colspan="2">
-                                    <p class="s13  pl-1 text-left" style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
+                                    <p class="s13  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->allotee->account_no}}</p>
                                 </td>
 
 
@@ -926,15 +979,18 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="2">
-                                    <p class="s11  pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
+                                    <p class="s11  pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->issue_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s13  pl-2 text-left" style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
+                                    <p class="s13  pl-2 text-left"
+                                       style="margin-bottom: 0px">{{showDate($bill->due_date)}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s11  pl-1 text-left" style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
+                                    <p class="s11  pl-1 text-left"
+                                       style="margin-bottom: 0px">{{$bill->fromMonth->short ?? ''}} {{$bill->year}}
                                         TO {{$bill->toMonth->short ?? ''}} {{$bill->year}} </p>
                                 </td>
                             </tr>
@@ -965,29 +1021,33 @@
                                 </th>
 
                             </tr>
+                            @foreach($bill->billCharges as $billCharges)
                             <tr>
-                                @foreach($bill->billCharges as $billCharges)
                                     {{--                                    {{dd($billCharges->PlotCharges)}}--}}
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s10 pl-1  text-left" style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
+                                        <p class="s10 pl-1  text-left"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->charge->name}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-1  text-right" style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-1  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{($billCharges->PlotCharges->is_period == 1) ? $bill->total_months .' X '. $billCharges->PlotCharges->amount : '' . $billCharges->PlotCharges->amount}}</p>
                                     </td>
                                     <td class="border border-top border-left border-bottom border-right"
                                         colspan="4">
-                                        <p class="s11 pr-2  text-right" style="margin-bottom: 0px">{{$billCharges->total}}</p>
+                                        <p class="s11 pr-2  text-right"
+                                           style="margin-bottom: 0px">{{$billCharges->total}}</p>
                                     </td>
                             </tr>
                             @endforeach
 
-                            </tr>
+
 
 
                         </table>
@@ -997,58 +1057,68 @@
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 826pt;"
                                     colspan="12">
-                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable Amount</p>
+                                    <p class="s10 text-center line-height-9" style="margin-bottom: 0px">Payable
+                                        Amount</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;"
-                                    >
-                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current Bill</p>
+                                >
+                                    <p class="s10 pl-4 text-left line-height-9" style="margin-bottom: 0px">Current
+                                        Bill</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
-                                    colspan="2" >
-                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">Arrears</p>
+                                    colspan="2">
+                                    <p class="s10 pl-4 pr-4 text-center line-height-9" style="margin-bottom: 0px">
+                                        Arrears</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
-                                    colspan="3" >
-                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before Due Date</p>
+                                    colspan="3">
+                                    <p class="s13 pl-1 text-left line-height-9" style="margin-bottom: 0px">Total Before
+                                        Due Date</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;"
-                                    >
+                                >
                                     <p class="s10 pl-3 text-left line-height-9" style="margin-bottom: 0px">Surcharge</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;"
-                                    >
-                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After Due Date</p>
+                                >
+                                    <p class="s13 pl-3 text-left line-height-9" style="margin-bottom: 0px">Total After
+                                        Due Date</p>
                                 </td>
                             </tr>
                             <tr class="h-14">
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 158pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->bill_total}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->bill_total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 148pt;"
                                     colspan="2">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->arrears}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->arrears}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 90pt;"
                                     colspan="3">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->total}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 86pt;">
-                                    <p class="s11 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
+                                    <p class="s11 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_charges}}</p>
                                 </td>
                                 <td class="border border-top border-left border-bottom border-right"
                                     style="width: 107pt;">
-                                    <p class="s13 text-center line-height-9" style="margin-bottom: 0px">{{$bill->sub_total}}</p>
+                                    <p class="s13 text-center line-height-9"
+                                       style="margin-bottom: 0px">{{$bill->sub_total}}</p>
                                 </td>
                             </tr>
 
@@ -1113,7 +1183,7 @@
                     var container = $('<div></div>'); // Create a container element to hold all invoices
 
                     // Loop through each invoice and append its HTML content to the container
-                    invoices.each(function(index, invoice) {
+                    invoices.each(function (index, invoice) {
                         var invoiceHTML = $(invoice).html(); // Get the HTML content of each invoice
                         container.append('<div class="invoice">' + invoiceHTML + '</div>'); // Append invoice HTML to the container
                     });
@@ -1125,7 +1195,7 @@
                         header: null, // Exclude header from the printed output
                         footer: null, // Exclude footer from the printed output
                         pageTitle: "All Invoices", // Set a custom page title
-                        afterPrint: function() {
+                        afterPrint: function () {
                             // Callback function after printing (optional)
                             console.log("All invoices printed");
                         }
