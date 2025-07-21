@@ -45,8 +45,10 @@ class BillController extends Controller
                     $instance->where(function ($query) use ($searchTerm) {
 
                         $query->whereHas('allotee', function ($query) use ($searchTerm) {
-                            $query->where('plot_no', 'like', '%' . $searchTerm . '%');
+                            $query->where('plot_no', 'like', '%' . $searchTerm . '%')
+                              ->orWhere('id', $searchTerm);
                         })
+
                             ->orWhereHas('allotee', function ($query) use ($searchTerm) {
                                 $query->where('name', 'like', '%' . $searchTerm . '%');
                             })
@@ -56,7 +58,7 @@ class BillController extends Controller
                             ->orWhereHas('size', function ($query) use ($searchTerm) {
                                 $query->where('name', 'like', '%' . $searchTerm . '%');
                             })
-                        ->orWhere('bill_number', 'like', '%' . $searchTerm . '%'); //search by bill number
+                            ->orWhere('bill_number', 'like', '%' . $searchTerm . '%'); //search by bill number
                     });
 
                     if (!empty($request->get('sector_id'))) {
@@ -69,27 +71,32 @@ class BillController extends Controller
                 })
                 ->addColumn('checkBill', function ($bill) {
 
-                        return '<input type="checkbox" class="form-check-right checkBill" name="checkBill[' . $bill->id . ']" id="" value="1">';
+                    return '<input type="checkbox" class="form-check-right checkBill" name="checkBill[' . $bill->id . ']" id="" value="1">';
 
                 })
                 ->addColumn('billType', function ($bill) {
                     return showBillTypeStatus($bill);
                 })
+                ->addColumn('consumer_id', function ($bill) {
+                    return $bill->allotee ? $bill->allotee->id : '';
+                })
                 ->addColumn('bill_number', function ($bill) {
                     return $bill->bill_number;
                 })
                 ->addColumn('name', function ($bill) {
-                    // Concatenate the parts of the name, handling null values properly
-                    return ($bill->allotee->name ?? '') . ' ' .
-                        ($bill->allotee->plot_no ?? '') . ' ' .
-                        ($bill->sector->name ?? '') . ' ' .
-                        ($bill->size->name ?? '');
+                    return
+                        ($bill->allotee ? $bill->allotee->name : '') . ' ' .
+                        ($bill->allotee ? $bill->allotee->plot_no : '') . ' ' .
+                        ($bill->sector ? $bill->sector->name : '') . ' ' .
+                        ($bill->size ? $bill->size->name : '');
                 })
                 ->addColumn('year', function ($bill) {
                     return $bill->year;
                 })
                 ->addColumn('duration', function ($bill) {
-                    return $bill->fromMonth->name . '-' . $bill->toMonth->name;
+                    return
+                        ($bill->fromMonth ? $bill->fromMonth->name : '') . '-' .
+                        ($bill->toMonth ? $bill->toMonth->name : '');
                 })
                 ->addColumn('total', function ($bill) {
                     return $bill->total ?? '';
@@ -100,15 +107,15 @@ class BillController extends Controller
                     return $bill->sub_total ?? '';
                 })
                 ->addColumn('due_amount', function ($bill) {
-                    return $bill->transaction->due_amount ?? '';
-                }) ->addColumn('is_active', function ($bill) {
-                    if (isset($bill->is_active) &&  $bill->is_active == 1) {
+                    return $bill->transaction ? $bill->transaction->due_amount : '';
+                })->addColumn('is_active', function ($bill) {
+                    if (isset($bill->is_active) && $bill->is_active == 1) {
                         return '<span class="badge badge-success">Active</span>';
                     } else {
-                        return '<span class="badge badge-warning">Arrear Adjusted</span>';
+                        return '<span class="badge badge-warning">Inactive</span>';
                     }
 
-                 })
+                })
                 ->addColumn('status', function ($bill) {
                     if (isset($bill->transaction->due_amount) && $bill->transaction->due_amount > 0 && $bill->is_paid == 1) {
                         return '<span class="badge badge-warning">Partially Paid</span>';
@@ -124,7 +131,7 @@ class BillController extends Controller
                     $viewBtn = '';
                     //$bill->is_paid == 0 &&
 //                    if ($bill->is_active == 1) {
-                        $deleteBtn = '<a href="javascript:void(0)" data-url="' . $deleteUrl . '"
+                    $deleteBtn = '<a href="javascript:void(0)" data-url="' . $deleteUrl . '"
                                            data-id="' . $bill->id . '"
                                            class="text-danger delete-record "
                                            title="Delete Record"><i class="fas fa-trash"></i></a>';
@@ -154,12 +161,12 @@ class BillController extends Controller
 
                     return $viewBtn . $editBtn . $deleteBtn;
                 })
-                ->rawColumns(['action', 'status', 'billType','checkBill' ,'is_active'])
+                ->rawColumns(['action', 'status', 'billType', 'checkBill', 'is_active'])
                 ->make(true);
         }
         $sector = Sector::all();
         $size = Size::all();
-        return view('backend.bills.index', compact('title','sector','size'));
+        return view('backend.bills.index', compact('title', 'sector', 'size'));
     }
 
 
@@ -334,7 +341,6 @@ class BillController extends Controller
         $plotCharges = $plotChargesQuery->get();
 
 
-//        dd($bill,$plotCharges );
         $chargesDetailArray = [];
 
         foreach ($plotCharges as $ch) {
@@ -517,9 +523,6 @@ class BillController extends Controller
             return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
         }
     }
-
-
-
 
 
     public function checkDuplicateBill(Request $request)
@@ -1462,6 +1465,10 @@ class BillController extends Controller
 
     public function billUpdateTimePeriod($request, $allotee, $totalMonths, $totalBeforeArrearAmountOfCharges, $billType, $bill, $id)
     {
+        $totalArrears = 0;
+        $applyCharges = []; // Always initialize to avoid undefined var
+
+        // Get charge details
         if ($request->charges) {
             $charges = PlotCharges::where('size_id', $allotee->size->id)
                 ->where('year', $request->year)
@@ -1469,21 +1476,11 @@ class BillController extends Controller
                 ->get();
 
             foreach ($charges as $charge) {
-                $totalMonthCharges = ($charge->is_period == 1) ? $charge->amount * $totalMonths : $charge->amount;
+                $totalMonthCharges = ($charge->is_period == 1)
+                    ? $charge->amount * $totalMonths
+                    : $charge->amount;
+
                 $totalBeforeArrearAmountOfCharges += $totalMonthCharges;
-
-                $percentageDecimal = getSettingValue('sub_charges') / 100;
-
-                $totalArrears = max($allotee->arrears, Bill::where('is_time_period',1)
-                    ->where('allotee_id', $allotee->id)
-                    ->where('id', '<', $id)
-                    ->where('is_paid', 0)
-                    ->where('is_active', 0)
-                    ->sum('total'));
-
-                $totalAmountOfCharges = $totalBeforeArrearAmountOfCharges + $totalArrears;
-                $subCharges = $totalBeforeArrearAmountOfCharges * $percentageDecimal;
-                $subTotal = $totalAmountOfCharges + $subCharges;
 
                 $applyCharges[] = [
                     'plot_charge_id' => $charge->id,
@@ -1492,12 +1489,31 @@ class BillController extends Controller
             }
         }
 
-        // Deactivate bills based on $billType
+        // ✅ Correct way to calculate total arrears:
+        $previousUnpaidBills = Bill::where('is_time_period', 1)
+            ->where('allotee_id', $allotee->id)
+            ->where('id', '<', $id)
+            ->where('is_paid', 0)
+//            ->where('is_active', 0)
+            ->sum('bill_total');
+
+         $totalArrears = $allotee->arrears + $previousUnpaidBills;
+
+        // Charges applied on current charges only (not on arrears)
+        $percentageDecimal = getSettingValue('sub_charges') / 100;
+        $subCharges = $totalBeforeArrearAmountOfCharges * $percentageDecimal;
+
+        // This is the final amount shown in bill
+        $totalAmountOfCharges = $totalBeforeArrearAmountOfCharges + $totalArrears;
+        $subTotal = $totalAmountOfCharges + $subCharges;
+
+        // ✅ Deactivate previous bills
         Bill::where('is_time_period', 1)
             ->where('allotee_id', $allotee->id)
             ->where('id', '<', $id)
             ->update(['is_active' => 0]);
 
+        // Update the bill
         $billData = [
             'allotee_id' => $allotee->id,
             'bank_id' => $request->bank_id,
@@ -1517,23 +1533,28 @@ class BillController extends Controller
             'total' => $totalAmountOfCharges,
             'sub_charges' => $subCharges,
             'sub_total' => $subTotal,
+            'is_active' => $request->status,
             'is_time_period' => ($billType == 'p'),
         ];
 
-        $bill->update($billData);
+         $bill->update($billData);
 
+        // Save bill charges
         BillCharge::where('bill_id', $id)->delete();
 
-        $billChargesData = array_map(function ($row) use ($id) {
-            return [
-                'bill_id' => $id,
-                'plot_charge_id' => $row['plot_charge_id'],
-                'total' => $row['amount'],
-            ];
-        }, $applyCharges);
+        if (!empty($applyCharges)) {
+            $billChargesData = array_map(function ($row) use ($id) {
+                return [
+                    'bill_id' => $id,
+                    'plot_charge_id' => $row['plot_charge_id'],
+                    'total' => $row['amount'],
+                ];
+            }, $applyCharges);
 
-        BillCharge::insert($billChargesData);
+            BillCharge::insert($billChargesData);
+        }
 
+        // Save bill transaction
         BillTransaction::where('bill_id', $id)->delete();
 
         BillTransaction::create([

@@ -170,6 +170,26 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label class="col-form-label  ">Bill Status <span
+                                                class="text-danger">*</span> </label>
+                                        <div
+                                            class="form-group form-group-feedback form-group-feedback-right">
+                                            <select data-placeholder="Select Status" required
+                                                    name="status" id="status"
+                                                    class="form-control select-search mb-3 "
+                                                    data-fouc>
+                                                <option></option>
+                                                <option  {{($bill->status == 1) ? 'selected' : ''}} value="1">Enabled</option>
+                                                <option  {{($bill->status == 0) ? 'selected' : ''}} value="0">Disabled</option>
+
+                                            </select>
+                                            @if ($errors->has('bank_id'))
+                                                <span
+                                                    class="text-danger">{{ $errors->first('bank_id') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
 

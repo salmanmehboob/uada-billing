@@ -198,6 +198,7 @@ Route::middleware(['auth','active'])->group(function () {
 
     Route::get('general-report', [ReportController::class, 'generalReport'])->name('general-report');
     Route::get('get-general-report', [ReportController::class, 'getGeneralReport'])->name('get-general-report');
+    Route::get('/admin/general-report-get', [ReportController::class, 'generalReportGet'])->name('general-report-get');
 
 
     Route::get('show-bill-violation', [BillViolationController::class, 'showViolation'])->name('show-bill-violation');

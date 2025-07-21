@@ -44,169 +44,131 @@
             </div>
             @include('backend.message')
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 mb-4">
-                        <label for="size_id" class="col-form-label  ">Plot Size </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select name="size_id" id="size_id"
-                                    class="form-control select-search-all "
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @foreach($size as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
+                <form method="GET" action="{{ route('general-report-get') }}">
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <label for="size_id" class="col-form-label  ">Plot Size </label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select name="size_id" id="size_id" class="form-control select-search-all " data-fouc>
+                                    <option selected value="">All</option>
+                                    @foreach($size as $row)
+                                        <option value="{{$row->id}}" {{ request('size_id') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label  ">Sector </label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select name="sector_id" id="sector_id" class="form-control select-search-all " data-fouc>
+                                    <option selected value="">All</option>
+                                    @foreach($sector as $row)
+                                        <option value="{{$row->id}}" {{ request('sector_id') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+{{--                        <div class="col-md-3 mb-4">--}}
+{{--                            <label class="col-form-label  ">Select Head </label>--}}
+{{--                            <div class="form-group form-group-feedback form-group-feedback-right">--}}
+{{--                                <select data-placeholder="Select Head" name="charge_id" id="charge_id" class="form-control select-search-all" data-fouc>--}}
+{{--                                    <option selected value="">All</option>--}}
+{{--                                    @foreach($charges as $key =>  $row)--}}
+{{--                                        <option value="{{$row->id}}" {{ request('charge_id') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-3 mb-4">--}}
+{{--                            <label class="col-form-label  ">Select Bank </label>--}}
+{{--                            <div class="form-group form-group-feedback form-group-feedback-right">--}}
+{{--                                <select data-placeholder="Select Bank" name="bank_id" id="bank_id" class="form-control select-search-all" data-fouc>--}}
+{{--                                    <option selected value="">All</option>--}}
+{{--                                    @foreach($bank as $key =>  $row)--}}
+{{--                                        <option value="{{$row->id}}" {{ request('bank_id') == $row->id ? 'selected' : '' }}>{{$row->name .' '. $row->branch.' ' . $row->account_no}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label  ">Financial Year </label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select data-placeholder="Select Financial Year" name="year" id="year" class="form-control select-search-all mb-3 " data-fouc>
+                                    <option selected value="">All</option>
+                                    @php
+                                        $currentYear = date('Y');
+                                        $startYear = $currentYear - 29;
+                                    @endphp
+                                    @for ($year = $currentYear; $year >= $startYear; $year--)
+                                        <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label  ">From Month </label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select data-placeholder="Select Month" name="from_month" id="from_month" class="form-control select-search-all mb-3 month" data-fouc>
+                                    <option selected value="">All</option>
+                                    @foreach($months as $key =>  $row)
+                                        <option value="{{$row->id}}" {{ request('from_month') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label  ">To Month </label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select data-placeholder="Select Month" name="to_month" id="to_month" class="form-control select-search-all mb-3 month" data-fouc>
+                                    <option selected value="">All</option>
+                                    @foreach($months as $key =>  $row)
+                                        <option value="{{$row->id}}" {{ request('to_month') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label  ">Status </label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select name="status" id="status" class="form-control select-search-all mb-3" data-fouc>
+                                    <option selected value="">All</option>
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Paid</option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpaid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label">Amount</label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <input type="number" name="amount" class="form-control" value="{{ request('amount') }}" placeholder="Enter amount">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="col-form-label">Amount Filter</label>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <select name="amount_filter" class="form-control select-search-all" data-fouc>
+                                    <option value="" {{ request('amount_filter') == '' ? 'selected' : '' }}>Select Operator</option>
+                                    <option value="=" {{ request('amount_filter') == '=' ? 'selected' : '' }}>Equal</option>
+                                    <option value="<" {{ request('amount_filter') == '<' ? 'selected' : '' }}>Less than</option>
+                                    <option value=">" {{ request('amount_filter') == '>' ? 'selected' : '' }}>Greater than</option>
+                                    <option value="<=" {{ request('amount_filter') == '<=' ? 'selected' : '' }}>Less than or Equal</option>
+                                    <option value=">=" {{ request('amount_filter') == '>=' ? 'selected' : '' }}>Greater than or Equal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <button type="submit" class="btn btn-primary">Generate Report</button>
                         </div>
                     </div>
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">Sector </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select name="sector_id" id="sector_id"
-                                    class="form-control select-search-all "
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @foreach($sector as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">Select Head </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select data-placeholder="Select Head" required
-                                    name="charge_id" id="charge_id"
-                                    class="form-control select-search-all"
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @foreach($charges as $key =>  $row)
-                                    <option
-                                        value="{{$row->id}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('charge_id'))
-                                <span
-                                    class="text-danger">{{ $errors->first('charge_id') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">Select Bank </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select data-placeholder="Select Bank" required
-                                    name="bank_id" id="bank_id"
-                                    class="form-control select-search-all"
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @foreach($bank as $key =>  $row)
-                                    <option
-                                        value="{{$row->id}}">{{$row->name .' '. $row->branch.' ' . $row->account_no}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('bank_id'))
-                                <span
-                                    class="text-danger">{{ $errors->first('bank_id') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">Financial Year </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select data-placeholder="Select Financial Year" required
-                                    name="year" id="year"
-                                    class="form-control select-search-all mb-3 "
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @php
-                                    $currentYear = date('Y');
-                                    $startYear = $currentYear - 29;
-                                @endphp
-                                @for ($year = $currentYear; $year >= $startYear; $year--)
-                                    <option value="{{ $year }}">{{ $year }}</option>
-                                @endfor
-
-                            </select>
-                            @if ($errors->has('year'))
-                                <span
-                                    class="text-danger">{{ $errors->first('year') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">From Month </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select data-placeholder="Select Month" required
-                                    name="from_month" id="from_month"
-                                    class="form-control select-search-all mb-3 month"
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @foreach($months as $key =>  $row)
-                                    <option
-                                        value="{{$row->id}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('from_month'))
-                                <span
-                                    class="text-danger">{{ $errors->first('from_month') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">To Month </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select data-placeholder="Select Month" required
-                                    name="to_month" id="to_month"
-                                    class="form-control select-search-all mb-3 month"
-                                    data-fouc>
-                                <option selected value="">All</option>
-                                @foreach($months as $key =>  $row)
-                                    <option
-                                        value="{{$row->id}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('to_month'))
-                                <span
-                                    class="text-danger">{{ $errors->first('to_month') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <label class="col-form-label  ">Status </label>
-                        <div
-                            class="form-group form-group-feedback form-group-feedback-right">
-                            <select
-                                name="status" id="status"
-                                class="form-control select-search-all mb-3"
-                                data-fouc>
-                                <option selected value="">All</option>
-                                <option value="1">Paid</option>
-                                <option value="0">Un Paid</option>
-
-                            </select>
-                            @if ($errors->has('status'))
-                                <span
-                                    class="text-danger">{{ $errors->first('status') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                </div>
-                <div class="table-responsive">
-                    <table class="table general-report-table" id="generalReport">
+                </form>
+                @if(isset($bills))
+                <div class="table-responsive mt-4">
+                    <table class="table table-bordered" id="generalReport">
                         <thead>
                         <tr>
                             <th>Bill No</th>
                             <th>Allotee Name</th>
-                            <th>Bank</th>
+                            <th>Plot No</th>  
                             <th>Sector</th>
                             <th>Plot Size</th>
                             <th>Year</th>
@@ -218,14 +180,36 @@
                             <th>Sub Charges</th>
                             <th>Sub Total</th>
                             <th>Status</th>
-                            <th>Generated By</th>
+{{--                            <th>Generated By</th>--}}
                         </tr>
                         </thead>
                         <tbody>
-
+                        @forelse($bills as $row)
+                            <tr>
+                                <td><a target="_blank" title="View" href="{{ route('view-bill', $row->id) }}" class="text-info mr-1">{{ $row->bill_number }}</a></td>
+                                <td>{{ $row->allotee->name ?? '' }}</td>
+                                 <td>{{ $row->allotee->plot_no ?? '' }}</td> 
+                                <td>{{ $row->sector->name ?? '' }}</td>
+                                <td>{{ $row->size->name ?? '' }}</td>
+                                <td>{{ $row->year }}</td>
+                                <td>{{ $row->fromMonth->short ?? '' }}</td>
+                                <td>{{ $row->toMonth->short ?? '' }}</td>
+                                <td>{{ isset($row->issue_date) ? showDate($row->issue_date) : '' }}</td>
+                                <td>{{ isset($row->due_date) ? showDate($row->due_date) : '' }}</td>
+                                <td>{{ $row->total }}</td>
+                                <td>{{ $row->sub_charges }}</td>
+                                <td>{{ $row->sub_total }}</td>
+                                <td>{{ $row->is_paid == 1 ? 'Paid' : 'Un Paid' }}</td>
+{{--                                <td>{{ $row->generatedBy->name ?? '' }}</td>--}}
+                            </tr>
+                        @empty
+                            <tr><td colspan="15" class="text-center">No records found.</td></tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
+                @endif
+
             </div>
         </div>
         <!-- /basic datatable -->
@@ -270,27 +254,6 @@
                 }
             });
 
-            function loadProcessingBar() {
-                $('.table-responsive').block({
-                    message: '<i class="icon-spinner9 spinner"></i>',
-                    overlayCSS: {
-                        backgroundColor: '#fff',
-                        opacity: 0.8,
-                        cursor: 'wait'
-                    },
-                    css: {
-                        border: 0,
-                        padding: 0,
-                        backgroundColor: 'none'
-                    }
-                });
-            }
-
-            function hideProcessingBar() {
-                window.setTimeout(function () {
-                    $('.table-responsive').unblock();
-                }, 1000);
-            }
 
             $.extend($.fn.dataTable.defaults, {
                 autoWidth: false,
@@ -310,57 +273,9 @@
 
             var table = $('#generalReport').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 searching: true,
                 responsive: true,
-                render: true,
-                initComplete: function (settings, json) {
-                    hideProcessingBar();
-                },
-                drawCallback: function (settings) {
-                    loadProcessingBar();
-                    if (settings.aiDisplay.length > 0) {
-                        hideProcessingBar();
-                    } else {
-                        hideProcessingBar();
-                        // loadProcessingBar();
-                    }
-                    if (settings._iDisplayLength !== settings.oFeatures.bPaginate) {
-                        loadProcessingBar();
-                    }
-                },
-                ajax: {
-                    url: "{{ route('general-report') }}",
-                    // type: "POST", // Set the HTTP method to POST
-                    data: function (d) {
-                        d.search = $('input[type="search"]').val()
-                        d.size_id = $('#size_id').val()
-                        d.sector_id = $('#sector_id').val()
-                         d.bank_id = $('#bank_id').val()
-                        d.year = $('#year').val()
-                        d.from_month = $('#from_month').val()
-                        d.to_month = $('#to_month').val()
-                        d.status = $('#status').val()
-                        d.charge_id = $('#charge_id').val()
-                    }
-                },
-                columns: [
-                    {data: 'bill_number' },
-                    {data: 'allotee_name' },
-                    {data: 'bank' },
-                    {data: 'sector' },
-                    {data: 'plot_size'},
-                    {data: 'year'},
-                    {data: 'from_month'},
-                    {data: 'to_month'},
-                    {data: 'issue_date'},
-                    {data: 'due_date'},
-                    {data: 'total'},
-                    {data: 'sub_charges'},
-                    {data: 'sub_total'},
-                    {data: 'status'},
-                    {data: 'generated_by'},
-                ],
                 buttons: {
                     dom: {
                         button: {
@@ -373,17 +288,11 @@
                     ]
                 },
                 order: [[0, 'asc']],
-                lengthMenu: [[100, 500, 1000, 5000, -1], [100, 500, 1000, 5000, "All"]],
-                pageLength: 100 // This will set the default number of rows to display per page to 500
+                lengthMenu: [[50 ,100, 500, 1000, 5000, -1], [50 ,100, 500, 1000, 5000, "All"]],
+                pageLength: 50 // This will set the default number of rows to display per page to 500
 
             });
 
-
-            $('#size_id ,#sector_id ,#type_id, #bank_id ,#year , #from_month ,#to_month,#status,#charge_id').change(function () {
-                loadProcessingBar();
-                table.draw();
-
-            });
         });
     </script>
 

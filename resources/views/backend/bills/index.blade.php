@@ -104,6 +104,7 @@
                 <tr>
                     <th><input type="checkbox" id="checkAll"></th>
                     <th>Type</th>
+                    <th>Consumer ID</th>
                     <th>Bill Number</th>
                     <th>Name</th>
                     <th>Year</th>
@@ -237,6 +238,7 @@
                 columns: [
                     {data: 'checkBill', orderable: false, searchable: false},
                     {data: 'billType', name: 'billType', orderable: false, searchable: false},
+                    {data: 'consumer_id', name: 'consumer_id'},
                     {data: 'bill_number', name: 'bill_number'},
                     {data: 'name', name: 'name'},
                     {data: 'year', name: 'year'},
