@@ -36,23 +36,37 @@ class AlloteeController extends Controller
         $title = 'Allotee';
 
         if ($request->ajax()) {
-            $allotees = Allotee::with('size', 'sector');
+            $allotees = Allotee::with('size', 'sector', 'type'); // Added 'type' if it's a relationship as per your column
 
             return Datatables::of($allotees)
                 ->filter(function ($instance) use ($request) {
                     $searchTerm = $request->get('search');
-                    $instance->where(function ($query) use ($searchTerm) {
-                        $query->where('plot_no', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('name', 'like', '%' . $searchTerm . '%')
-                            ->orWhereHas('sector', function ($query) use ($searchTerm) {
-                                $query->where('name', 'like', '%' . $searchTerm . '%');
-                            })
-                            ->orWhereHas('size', function ($query) use ($searchTerm) {
-                                $query->where('name', 'like', '%' . $searchTerm . '%');
-                            });
-                    });
+                    $sectorId = $request->get('sector_id');     // Get sector_id from request
+                    $plotSizeId = $request->get('plot_size_id'); // Get plot_size_id from request
 
+                    // Apply global search term
+                    if (!empty($searchTerm)) {
+                        $instance->where(function ($query) use ($searchTerm) {
+                            $query->where('plot_no', 'like', '%' . $searchTerm . '%')
+                                ->orWhere('name', 'like', '%' . $searchTerm . '%')
+                                ->orWhereHas('sector', function ($query) use ($searchTerm) {
+                                    $query->where('name', 'like', '%' . $searchTerm . '%');
+                                })
+                                ->orWhereHas('size', function ($query) use ($searchTerm) {
+                                    $query->where('name', 'like', '%' . $searchTerm . '%');
+                                });
+                        });
+                    }
 
+                    // Apply sector filter
+                    if (!empty($sectorId)) {
+                        $instance->where('sector_id', $sectorId);
+                    }
+
+                    // Apply plot size filter
+                    if (!empty($plotSizeId)) {
+                        $instance->where('size_id', $plotSizeId); // Assuming 'size_id' is the foreign key
+                    }
                 })
                 ->addColumn('code', function ($row) {
                     return $row->id;
@@ -105,7 +119,11 @@ class AlloteeController extends Controller
                 ->make(true);
         }
 
-        return view('backend.allotees.index', compact('title'));
+        // For the initial page load, get all sectors and plot sizes to populate the filters
+        $sectors = Sector::all(); // Assuming you have a Sector model
+        $plotSizes = Size::all(); // Assuming you have a Size model for plot sizes
+
+        return view('backend.allotees.index', compact('title', 'sectors', 'plotSizes'));
     }
 
     public function indexTransfer()

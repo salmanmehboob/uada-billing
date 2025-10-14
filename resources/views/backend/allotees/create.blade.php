@@ -173,6 +173,28 @@
                                     </div>
 
                                     <div class="col-md-4">
+                                        <label class="col-form-label  ">Select Sector <span
+                                                    class="text-danger">*</span> </label>
+                                        <div
+                                                class="form-group form-group-feedback form-group-feedback-right">
+                                            <select data-placeholder="Select Sector" required
+                                                    name="sector_id" id="sector_id"
+                                                    class="form-control select-search mb-3 "
+                                                    data-fouc>
+                                                <option></option>
+                                                @foreach($sectors as $key =>  $row)
+                                                    <option
+                                                            value="{{$row->id}}">{{$row->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('sector_id'))
+                                                <span
+                                                        class="text-danger">{{ $errors->first('sector_id') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
                                         <label class="col-form-label  ">Select Plot Size <span
                                                 class="text-danger">*</span> </label>
                                         <div

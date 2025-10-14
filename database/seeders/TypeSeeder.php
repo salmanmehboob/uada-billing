@@ -18,7 +18,7 @@ class TypeSeeder extends Seeder
 
              'Plot',
              'House',
-             'Shop',
+             'Shop',  'School', 'Utility'
 
         );
 

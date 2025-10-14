@@ -23,7 +23,7 @@ function showStatus($status)
 {
 
     if ($status == 1) {
-        echo '<span class="badge badge-success">Active</span>';
+        echo '<span class="b adge badge-success">Active</span>';
 
     } else {
         echo '<span class="badge badge-danger">InActive</span>';
